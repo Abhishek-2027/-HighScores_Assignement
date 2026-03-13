@@ -46,7 +46,8 @@ adaptive-testing-system/
 │       │   └── gemini_service.py    # Gemini study plan generation
 │       ├── database/mongodb.py      # Async Motor connection pool
 │       └── utils/irt.py             # IRT math — 1PL logistic model
-│
+│       |--── .env                   # please config you env file with google api key and mongoosAtlas string
+|
 ├── frontend/
 │   ├── index.html        # All 3 pages (home / test / plan) in one file
 │   ├── css/style.css     # Complete dark-theme stylesheet
@@ -56,7 +57,7 @@ adaptive-testing-system/
 │       ├── ui.js         # DOM rendering functions
 │       └── app.js        # Event handlers / app controller
 │
-├── .env.example
+├
 └── README.md
 ```
 
@@ -185,3 +186,13 @@ Selects the question with highest information from a difficulty band centred on 
 - Learning rate calibration (0.3) — needed iterative testing to prevent oscillation
 - Difficulty band tolerance progression — required IRT domain knowledge
 - Gemini prompt engineering for reliable JSON schema compliance
+
+
+**working example **
+<img width="1486" height="816" alt="image" src="https://github.com/user-attachments/assets/33ca42f1-4c23-4d86-a666-c2ac4dc37169" />
+
+
+<img width="1220" height="794" alt="image" src="https://github.com/user-attachments/assets/a5b387b7-914d-4be3-989c-828aebd3ea8a" />
+
+
+<img width="696" height="820" alt="image" src="https://github.com/user-attachments/assets/6ba3bf69-2008-4b33-9ad5-54820035710b" />

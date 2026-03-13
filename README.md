@@ -70,6 +70,18 @@ adaptive-testing-system/
 ```bash
 cp .env.example .env
 # Edit .env — fill in MONGODB_URI and GEMINI_API_KEY
+MONGODB_URI=mongodb+srv://db_user:passward@cluster0.df8suni.mongodb.net/adaptive_testing?retryWrites=true&w=majority
+DATABASE_NAME=adaptive_testing
+
+GEMINI_API_KEY=yhjgdghfgdf  ## use your own key 
+
+APP_ENV=development
+CORS_ORIGINS=["http://localhost:5173","http://localhost:3000", "http://127.0.0.1:5500", "http://localhost:5500"]
+
+LEARNING_RATE=0.3
+MAX_QUESTIONS=10
+BASELINE_ABILITY=0.5
+
 ```
 
 ### 2. Start Backend

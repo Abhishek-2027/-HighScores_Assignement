@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GRE Adaptive Testing Engine</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE: Home
+  ═══════════════════════════════════════════════ -->
+  <div id="page-home" class="page active">
+    <div class="center-wrapper">
+      <div class="home-card">
+
+        <div class="home-header">
+          <div class="logo-icon">🧠</div>
+          <h1>GRE Adaptive Test</h1>
+          <p class="subtitle">AI-powered diagnostic engine using Item Response Theory</p>
+        </div>
+
+        <div class="pill-row">
+          <span class="pill">IRT Algorithm</span>
+          <span class="pill">Adaptive Difficulty</span>
+          <span class="pill">AI Study Plan</span>
+          <span class="pill">10 Questions</span>
+        </div>
+
+        <form id="form-start" class="start-form" autocomplete="off">
+          <label for="input-userid">Enter your name or student ID</label>
+          <input
+            type="text"
+            id="input-userid"
+            placeholder="e.g. alex_student_2024"
+            maxlength="80"
+            required
+          />
+          <button type="submit" id="btn-start" class="btn btn-primary">
+            Begin Adaptive Test →
+          </button>
+        </form>
+
+        <div class="divider"></div>
+
+        <button id="btn-seed" class="btn btn-ghost">
+          🌱 Seed Database (first-time setup)
+        </button>
+        <p id="seed-msg" class="seed-msg hidden"></p>
+
+        <p class="footer-note">Powered by Gemini AI · FastAPI · MongoDB Atlas</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE: Test
+  ═══════════════════════════════════════════════ -->
+  <div id="page-test" class="page">
+    <div class="test-layout">
+
+      <!-- Top bar -->
+      <header class="test-header">
+        <div class="test-header-left">
+          <span class="logo-sm">🧠</span>
+          <span class="test-title">GRE Adaptive Test</span>
+        </div>
+        <span id="test-counter" class="counter-badge">0 / 10</span>
+      </header>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-labels">
+          <span>Progress</span>
+          <span id="progress-label">0 / 10 questions</span>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Ability meter -->
+      <div class="ability-card" id="ability-card">
+        <div class="ability-row">
+          <span class="ability-label">Ability Score</span>
+          <span id="ability-pct" class="ability-pct">50%</span>
+        </div>
+        <div class="ability-track">
+          <div id="ability-bar" class="ability-fill" style="width:50%"></div>
+        </div>
+        <div class="ability-bottom">
+          <span id="ability-level" class="ability-level developing">Developing</span>
+          <span id="ability-raw" class="ability-raw">0.500 θ</span>
+        </div>
+      </div>
+
+      <!-- Error banner -->
+      <div id="test-error" class="error-banner hidden"></div>
+
+      <!-- Loading spinner -->
+      <div id="test-loading" class="loading-block hidden">
+        <div class="spinner"></div>
+        <p>Selecting your next question...</p>
+      </div>
+
+      <!-- Question card -->
+      <div id="question-card" class="question-card hidden">
+        <div class="question-meta">
+          <span id="q-topic" class="topic-badge">Algebra</span>
+          <span id="q-difficulty" class="diff-badge easy">Easy</span>
+        </div>
+        <h2 id="q-text" class="question-text"></h2>
+        <div id="options-list" class="options-list"></div>
+        <button id="btn-submit" class="btn btn-primary" disabled>
+          Submit Answer
+        </button>
+      </div>
+
+      <!-- Feedback card (shown after submit) -->
+      <div id="feedback-card" class="feedback-card hidden">
+        <div class="feedback-icon" id="feedback-icon"></div>
+        <h3 id="feedback-title" class="feedback-title"></h3>
+        <p id="feedback-correct-answer" class="feedback-answer hidden"></p>
+        <p id="feedback-ability" class="feedback-ability"></p>
+        <p id="feedback-qnum" class="feedback-qnum"></p>
+        <button id="btn-next" class="btn btn-ghost mt-4">Next Question →</button>
+        <button id="btn-plan" class="btn btn-primary mt-4 hidden">✨ Generate AI Study Plan</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE: Study Plan
+  ═══════════════════════════════════════════════ -->
+  <div id="page-plan" class="page">
+    <div class="plan-layout">
+
+      <div class="plan-header">
+        <div class="logo-icon">✅</div>
+        <h1>Test Complete!</h1>
+        <p id="plan-summary" class="subtitle"></p>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="stats-grid" id="stats-grid"></div>
+
+      <!-- Topic breakdown -->
+      <div class="topic-grid" id="topic-grid"></div>
+
+      <!-- Study plan steps -->
+      <div class="plan-section-title">
+        <h2>✨ Your AI Study Plan</h2>
+        <p class="plan-subtitle">Generated by Gemini based on your performance</p>
+      </div>
+
+      <!-- Loading state for plan generation -->
+      <div id="plan-loading" class="loading-block hidden">
+        <div class="spinner"></div>
+        <p>Gemini is generating your personalized study plan...</p>
+        <p class="loading-sub">Analysing your performance data</p>
+      </div>
+
+      <div id="steps-list" class="steps-list"></div>
+
+      <button id="btn-restart" class="btn btn-primary w-full mt-6">
+        Take Another Test
+      </button>
+
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

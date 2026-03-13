@@ -23,7 +23,7 @@ FastAPI Backend
 | Layer    | Technology                               |
 |----------|------------------------------------------|
 | Frontend | HTML5, CSS3, Vanilla JavaScript (ES2020) |
-| Backend  | FastAPI, Python 3.11+, Motor (async)     |
+| Backend  | FastAPI, Python 3.10+ (3.10 safer), Motor (async)     |
 | Database | MongoDB Atlas                            |
 | AI       | Google Gemini 1.5 Flash                  |
 | IRT      | 1-Parameter Logistic Model (Rasch)       |
